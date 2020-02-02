@@ -1,0 +1,31 @@
+
+ul.friends {
+    position: relative;
+    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.16);
+    list-style: none;
+    min-height: 100%;
+    overflow: auto;
+}
+ul.friends li {
+    padding: 0.5rem 1em;
+}
+
+ul.message-box {
+    list-style: none;
+    min-height: 100%;
+    overflow: auto;
+}
+
+ul.message-box li {
+    background-color: beige;
+    padding: 0.5rem 1em;
+}
+
+.login-box {
+    background-color: whitesmoke;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.31);
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    padding: 1rem;
+}

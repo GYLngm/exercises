@@ -1,12 +1,13 @@
 <?php
 
+require_once("User.php");
+
 class MessageController
 {
     private $repository;
 
     public function __construct()
     {
-        $this->repository = new UserRepository();
         
     }
 
@@ -14,7 +15,6 @@ class MessageController
     {
         $req_arr = $_POST['package'];
         var_dump($req_arr);
-
 
     }
 
@@ -26,6 +26,8 @@ class MessageController
         ];
         echo json_encode($res);
     }
-
-
 }
+
+$msgC = new MessageController();
+$msgC->sendText();
+$msgC->ajaxUpdate();

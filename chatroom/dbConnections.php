@@ -9,13 +9,14 @@ class dbConnections
 
     public function getInstance() : PDO
     {
-        if (!is_null($this->dbh)){
+        if (is_null($this->dbh)){
             try {
                 $this->dbh = new PDO('mysql:host=localhost;dbname=chatroom', $this->user, $this->password);
+                
             } catch (Exception $e) {
                 echo $e->getMessage()."DataBase Connection error";
-
             }
+            return $this->dbh;
         }
         return $this->dbh;
     }

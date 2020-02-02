@@ -9,24 +9,22 @@ class User
     private $create_datetime;
     private $online;
 
+    public function __construct(){
+        $this->online = false;
+        $this->create_datetime = date('Y-m-d H:i:s', time());
+    }
+
     /**
-     * @return mixed
+     * @return int
      */
     public function getUid()
     {
         return $this->uid;
     }
 
-    /**
-     * @param mixed $uid
-     */
-    public function setUid($uid)
-    {
-        $this->uid = $uid;
-    }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUsername()
     {
@@ -34,7 +32,7 @@ class User
     }
 
     /**
-     * @param mixed $username
+     * @param string $username
      */
     public function setUsername($username)
     {
@@ -42,7 +40,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPassword()
     {
@@ -50,7 +48,7 @@ class User
     }
 
     /**
-     * @param mixed $password
+     * @param string $password
      */
     public function setPassword($password)
     {
@@ -58,7 +56,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getIpAddress()
     {
@@ -66,7 +64,7 @@ class User
     }
 
     /**
-     * @param mixed $ip_address
+     * @param string $ip_address
      */
     public function setIpAddress($ip_address)
     {
@@ -90,7 +88,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function getOnline()
     {
@@ -98,7 +96,7 @@ class User
     }
 
     /**
-     * @param mixed $online
+     * @param bool $online
      */
     public function setOnline($online)
     {

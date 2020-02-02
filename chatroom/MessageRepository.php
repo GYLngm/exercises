@@ -1,21 +1,31 @@
 <?php
 
+require_once("dbConnections.php");
+require_once("User.php");
+require_once("Message.php");
+
 class MessageRepository extends dbConnections
 {
-    /**
-     * 
-     * @param $id_group
-     */
-    public function findAllByGroup($id_group){
 
+    public function findAllByGroup(int $id_group) : array
+    {
+        $res = [];
+
+        return $res;
     }
 
-    /**
-     * Find users' conversations
-     * @param User $user
-     */
-    public function findByUser(User $user)
-    {
 
+    public function findByUser(User $user) : array
+    {
+        $res = [];
+
+        return $res;
+        
+    }
+
+    public function saveMessage(Message $message) : bool
+    {
+        
+        return false;
     }
 }
