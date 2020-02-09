@@ -1,0 +1,98 @@
+<?php
+
+require_once("vendor/autoload.php");
+require_once("phpAlgoBasic.php");
+
+use PHPUnit\Framework\TestCase as TestCase;
+
+class phpAlgoBasicTest extends TestCase
+{
+
+    public function testComparingBubbleAndQuickSort() : void 
+    {
+        $output_bubble = [];
+        $output_quick = [];
+        $arr_size = 100;
+
+        $input = [];
+        for($i=0;$i<$arr_size;$i++)
+        {
+            $input[] = random_int(0,100);
+        }
+        $phpalgo = new phpAlgoBasic();
+        $start = microtime(TRUE);
+        $output_bubble = $phpalgo->bubbleSort($input);
+        $end_bubble = microtime(TRUE) - $start;
+
+        $start = microtime(TRUE);
+        $output_quick = $phpalgo->quickSort($input);
+        $end_quick = microtime(TRUE) - $start;
+        
+        //$this->assertEquals(count($output_bubble),count($output_quick));
+        echo count($output_bubble)." in bubble sort, ".count($output_quick)."in quick sort\r\n";
+
+        $this->assertEquals(json_encode($output_bubble),json_encode($output_quick));
+        $this->assertLessThan($end_bubble,$end_quick);
+
+    }
+
+    public function testComparingBubbleAndQuickSortCounts() : void
+    {
+        $count = 100;
+        $arr_size = 100;
+        $avarege_time_bubble = 0.00;
+        $avarege_time_quick = 0.00;
+        $phpalgo = new phpAlgoBasic();
+        $group = [];
+        do{
+            $output_bubble = [];
+            $output_quick = [];
+
+            $input = [];
+            for($i=0;$i<$arr_size;$i++)
+            {
+                $input[] = random_int(0,100);
+            }
+            
+            $start = microtime(TRUE);
+            $output_bubble = $phpalgo->bubbleSort($input);
+            $end_bubble = microtime(TRUE) - $start;
+            $avarege_time_bubble += $end_bubble;
+
+            $start = microtime(TRUE);
+            $output_quick = $phpalgo->quickSort($input);
+            $end_quick = microtime(TRUE) - $start;
+            $avarege_time_quick += $end_quick;
+
+            $group[] = ($end_bubble < $end_quick)?0:1;
+            $count--;
+
+        } while($count >= 1);
+
+        echo PHP_EOL;
+        $avarege_time_bubble /= sizeof($group);
+        $avarege_time_quick /= sizeof($group);
+
+        echo "Bubble Sort: ".$avarege_time_bubble."s \r\n";
+        echo "Quick Sort:  ".$avarege_time_quick."s \r\n";
+        echo array_sum($group)/sizeof($group);
+    }
+
+    public function testjeuxDeRime()
+    {
+        $phpalgo = new phpAlgoBasic();
+        $handle = fopen("php://stdin","r");
+
+        $phpalgo->jeuxDeRime(fgets($handle));
+    }
+
+    public function testMakeSoundEx()
+    {
+        $phpalgo = new phpAlgoBasic();
+        $handle = fopen("php://stdin","r");
+
+        $res = $phpalgo->MakeSoundEx(fgets($handle));
+        echo PHP_EOL."SOUND DEX: $res".PHP_EOL;
+    }
+
+}
