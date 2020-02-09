@@ -101,7 +101,9 @@ class phpAlgoBasic
             }
         }
         printf("%d words found".PHP_EOL,$count);
+
         foreach($result_set as $value){
+
             printf(
                 "%s > similarity: %d (%d), string lev: %d, meta1: %s, meta2: %s".PHP_EOL,
                 $value["word"],
@@ -109,7 +111,7 @@ class phpAlgoBasic
                 $value["perc"],
                 $value["lev"],
                 $value["meta"],
-                $value["metaphone"]["meta"],
+                $value["metaphone"]["meta"]
             );
         }
 
