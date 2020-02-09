@@ -1,8 +1,6 @@
 <?php
     require_once("UserRepository.php");
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +15,16 @@
 </head>
 <body>
 <?php
-    if(isset($_GET['actionType']) && $_GET['actionType'] == 'dashbord')
+    if(isset($_GET['actionType']) && $_GET['actionType'] == 'dashbord'){
+
+        $repo = new UserRepository();
+        if(!$repo->checkUser($_POST['username'],$_POST['password']))
+            echo json_encode(['msg'=>'username or password don\'t match']);
+
+        $reop->findUsers();
+
         include("main.php");
+    }
     else
         include("login.php");
 

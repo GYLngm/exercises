@@ -56,3 +56,7 @@ $(document).ready(function(){
             alert("sent");
         });
     });
+
+    $('#loginForm').submit(function(){
+        
+    });

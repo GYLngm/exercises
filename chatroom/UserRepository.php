@@ -50,4 +50,21 @@ class UserRepository extends dbConnections
         return $stm->execute([$user->getUid()]);
     }
 
+    public function checkUser(string $username, string $passwd): bool
+    {
+        $stm = $this->getInstance()->prepare('
+            SELECT *
+            FROM users
+            WHERE $username=?
+        ');
+        $stm->execute([$username]);
+
+        if(count($stm->fetch()) < 1)
+            return false;
+        
+        return true;
+    }
+
+
+
 }
