@@ -95,4 +95,26 @@ class phpAlgoBasicTest extends TestCase
         echo PHP_EOL."SOUND DEX: $res".PHP_EOL;
     }
 
+    public function testinsertSortingDesc()
+    {
+        $phpalgo = new phpAlgoBasic();
+        $actual = [];
+        for($i=0;$i<1000;$i++){
+            $actual[] = random_int(0,100);
+        }
+        $expected = $actual;
+        $phpalgo->insertSortingDesc($actual);
+        rsort($expected);
+
+        $this->assertEquals(json_encode($actual),json_encode($expected));
+    }
+
+    public function testMultipleInsertSorting(){
+        $stack = 0;
+        for($x = 0; $x < 10; $x++)
+        {
+            $this->testinsertSortingDesc();
+        }
+    }
+
 }

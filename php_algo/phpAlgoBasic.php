@@ -144,4 +144,21 @@ class phpAlgoBasic
     }
 
 
+    public function insertSortingDesc(array &$input)
+    {
+        for($j=1;$j<count($input);$j++)
+        {
+            $key = $input[$j];
+            // insert key to sorted array
+            //print_r($input);
+            $i = $j-1;
+            while( $i >= 0 && $input[$i] < $key)
+            {
+                $input[$i+1] = $input[$i];
+                $i = $i - 1;  
+            }
+            $input[$i+1] = $key;
+        }
+    }
+
 }
