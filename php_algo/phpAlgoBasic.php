@@ -148,7 +148,7 @@ class phpAlgoBasic
      * Time complicity: O(nlgn)
      * @param array &$input
      */
-    public function insertSortingDesc(array &$input)
+    public function insertSortDesc(array &$input)
     {
         for($j=1;$j<count($input);$j++)
         {
@@ -163,6 +163,51 @@ class phpAlgoBasic
             }
             $input[$i+1] = $key;
         }
+    }
+
+    public function mergeSort(array $input, int $p=0, int $r=0) : array
+    {
+        
+        if($r == $p) return $input;
+
+        $r = ($r < 1)?count($input):$r;
+        $sorted_arr = [];
+
+        if($p < $r){
+            $q = ($p+$r)/2;
+            //Left
+            $this->mergeSort($input, $p, $q);
+            //Right
+            $this->mergeSort($input, $q+1, $r);
+
+            //Merge
+            $left = array_slice($input, $p, $r - $q);
+            $right = array_slice($input, $q+1, $r);
+            print_r($left);
+            print_r($right);
+
+            echo "end".PHP_EOL;
+            for($i=0,$j=0,$k=$p;$k<$r;$k++)
+            {
+                if(!isset($right[$j]) && !isset($left[$i])){
+                    break;
+                } 
+
+                if(!isset($right[$j])){
+                    $sorted_arr[] = $left[$i];
+                } else if(!isset($left[$i])) {
+                    $sorted_arr[] = $right[$j];
+                } else if($left[$i] < $right[$j]){
+                    $sorted_arr[] = $left[$i];
+                    $i++;
+                } else if($left[$i] > $right[$j]){
+                    $sorted_arr[] = $right[$j];
+                    $j++;
+                } 
+            }
+        }
+
+        return $sorted_arr;
     }
 
 }

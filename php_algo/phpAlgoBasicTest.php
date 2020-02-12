@@ -95,7 +95,7 @@ class phpAlgoBasicTest extends TestCase
         echo PHP_EOL."SOUND DEX: $res".PHP_EOL;
     }
 
-    public function testinsertSortingDesc()
+    public function testinsertSortDesc()
     {
         $phpalgo = new phpAlgoBasic();
         $actual = [];
@@ -109,12 +109,30 @@ class phpAlgoBasicTest extends TestCase
         $this->assertEquals(json_encode($actual),json_encode($expected));
     }
 
-    public function testMultipleInsertSorting(){
+    public function testmergeSort()
+    {
+        $phpalgo = new phpAlgoBasic();
+        $actual = [];
+        for($i=0;$i<10;$i++){
+            $actual[] = random_int(0,100);
+        }
+        $expected = $actual;
+        //print_r($actual);
+
+        $actual = $phpalgo->mergeSort($actual, 0, count($actual));
+        sort($expected);
+
+        $this->assertEquals(json_encode($actual),json_encode($expected));
+    }
+
+    public function testMultipleInsertSort(){
         $stack = 0;
         for($x = 0; $x < 10; $x++)
         {
-            $this->testinsertSortingDesc();
+            $this->testinsertSortDesc();
         }
     }
+
+
 
 }
