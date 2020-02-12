@@ -121,7 +121,7 @@ class phpAlgoBasic
     /**
      * Magic stone: 
      *  Find the minimum number of stones
-     * 
+     * Time complecity: O(n)
      * @param array $input
      * @return integer 
      */
@@ -143,7 +143,11 @@ class phpAlgoBasic
         return count($stack);
     }
 
-
+    /**
+     * Insertion sorting Desc
+     * Time complicity: O(nlgn)
+     * @param array &$input
+     */
     public function insertSortingDesc(array &$input)
     {
         for($j=1;$j<count($input);$j++)
