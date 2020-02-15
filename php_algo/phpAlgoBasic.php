@@ -131,10 +131,10 @@ class phpAlgoBasic
         sort($input);
 
         for($i=0;$i<count($input);$i++){
-            if(empty($stack)) $stack[] = $input[$i];
-
-            if($stack[count($input)-1] == $input[$i]){
-                $stack[count($input)-1]++;
+            if(empty($stack)){
+                $stack[] = $input[$i];
+            } else if($stack[count($stack)-1] == $input[$i]){
+                $stack[count($stack)-1]++;
             } else {
                 $stack[] = $input[$i];
             }
@@ -165,6 +165,13 @@ class phpAlgoBasic
         }
     }
 
+    /**
+     * Merge sorting
+     * Time complicity: O()
+     * @param array &$input
+     * @param int $p
+     * @param int $r
+     */
     public function mergeSort(array $input, int $p=0, int $r=0) : array
     {
         
@@ -208,6 +215,11 @@ class phpAlgoBasic
         }
 
         return $sorted_arr;
+    }
+
+    public function BracketBalence(String $str)
+    {
+        
     }
 
 }
