@@ -95,6 +95,18 @@ class phpAlgoBasicTest extends TestCase
         echo PHP_EOL."SOUND DEX: $res".PHP_EOL;
     }
 
+    public function testmMgicStone(){
+        $phpalgo = new phpAlgoBasic();
+        
+
+        $actual = $phpalgo->MagicStone([1,5,1]);
+        print_r($actual);
+        $expect = 2;
+
+        $this->assertEquals($expect,$actual);
+
+    }
+
     public function testinsertSortDesc()
     {
         $phpalgo = new phpAlgoBasic();
