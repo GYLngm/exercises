@@ -137,6 +137,25 @@ class phpAlgoBasicTest extends TestCase
         $this->assertEquals(json_encode($actual),json_encode($expected));
     }
 
+
+    public function testBracketBalence(){
+        $strs = [
+            "{{{{{{{{[]}}}[]}}}}}",
+            "{{{}{}{}]]}}}}}",
+            "{][}",
+
+        ];
+
+        $res = [];
+
+        $phpalgo = new phpAlgoBasic();
+        foreach($strs as $str) {
+            $res[] = $phpalgo->BracketBalence($str);
+        }
+        print_r($res);
+        $this->assertTrue(true);
+    }
+
     public function testMultipleInsertSort(){
         $stack = 0;
         for($x = 0; $x < 10; $x++)

@@ -46,78 +46,6 @@ class phpAlgoBasic
         return $input;
     }
 
-    public function jeuxDeRime($input)
-    {
-        $word_list = fopen("liste.de.mots.francais.frgut.txt","r");
-
-        $margin = 50;
-        $result_set = [];
-        $count = 0;
-        if($word_list)
-        {
-            while(($buffer = fgets($word_list,4096)) != FALSE){
-                // similar_text()
-                $sim = similar_text($input,$buffer,$perc);
-
-                //levenshtein()
-                $lev = levenshtein($input,$buffer);
-                /*
-                if($lev <= 3 && $perc > $margin){
-                    echo "$buffer> similarity: $sim ($perc %), string lev: $lev ".PHP_EOL;
-                    echo "sounddex $input: $soundDex1, sounddex $buffer: $soundDex2";
-                    echo PHP_EOL;
-                }*/
-                /*
-                //soundex()
-                $soundDex1 = soundex($input);
-                $soundDex2 = soundex($buffer);
-
-                if($soundDex1 == $soundDex2)
-                    echo "$buffer> similarity: $sim ($perc %), string lev: $lev ".PHP_EOL;
-                */
-                //metaphone()
-                $meta1 = metaphone($input,5);
-                $meta2 = metaphone($buffer,5);
-                $sim_mate = similar_text($meta1,$meta2,$perc_meta);
-                $lev_meta = levenshtein($meta1,$meta2);
-
-                if($lev_meta <= 1 && $sim_mate >= 1 && $perc_meta > $margin){
-                    array_push($result_set, [
-                        "compare" => $input,
-                        "word" => $buffer,
-                        "sim" => $sim,
-                        "perc" => $perc,
-                        "meta" => $meta1,
-                        "lev" => $lev,
-                        "metaphone" =>[
-                            "meta"=> $meta2,
-                            "lev" => $lev_meta,
-                            "sim" => $sim_mate,
-                            "perc" => $perc_meta
-                        ]
-                    ]);
-                    $count++;   
-                }
-            }
-        }
-
-        foreach($result_set as $value){
-
-            printf(
-                "%s > similarity: %d (%d), string lev: %d, meta1: %s, meta2: %s".PHP_EOL,
-                $value["word"],
-                $value["sim"],
-                $value["perc"],
-                $value["lev"],
-                $value["meta"],
-                $value["metaphone"]["meta"]
-            );
-        }
-        printf("%d words found".PHP_EOL,$count);
-        
-        fclose($word_list);
-    }
-
     /**
      * Magic stone: 
      *  Find the minimum number of stones
@@ -220,6 +148,104 @@ class phpAlgoBasic
     public function BracketBalence(String $str)
     {
         
+        $str = trim($str);
+        $left = ['[','{', '('];
+        $right = ['['=>']', '{'=>'}', '('=>')'];
+
+        $stack = [];
+        $stack[] = $str[0];
+        echo PHP_EOL;
+        for($i = 1;$i < strlen($str);$i++){
+            if(in_array($str[$i],$left)){
+                $stack[] = $str[$i];
+                print($stack[count($stack)-1].PHP_EOL);
+            } else if(in_array($str[$i],$right))
+            {
+                if(empty($stack)) return 0;
+
+                if(array_flip($right)[$str[$i]] == $stack[count($stack)-1] && !empty($stack))
+                {
+                    $shifted = array_pop($stack);
+                    print("should pop :".$shifted.PHP_EOL);
+                } else if(array_flip($right)[$str[$i]] != $stack[count($stack)-1] && !empty($stack)) 
+                {
+                    return 0;
+                } 
+            }
+        }
+
+        return 1;
     }
 
+    public function jeuxDeRime($input)
+    {
+        $word_list = fopen("liste.de.mots.francais.frgut.txt","r");
+
+        $margin = 50;
+        $result_set = [];
+        $count = 0;
+        if($word_list)
+        {
+            while(($buffer = fgets($word_list,4096)) != FALSE){
+                // similar_text()
+                $sim = similar_text($input,$buffer,$perc);
+
+                //levenshtein()
+                $lev = levenshtein($input,$buffer);
+                /*
+                if($lev <= 3 && $perc > $margin){
+                    echo "$buffer> similarity: $sim ($perc %), string lev: $lev ".PHP_EOL;
+                    echo "sounddex $input: $soundDex1, sounddex $buffer: $soundDex2";
+                    echo PHP_EOL;
+                }*/
+                /*
+                //soundex()
+                $soundDex1 = soundex($input);
+                $soundDex2 = soundex($buffer);
+
+                if($soundDex1 == $soundDex2)
+                    echo "$buffer> similarity: $sim ($perc %), string lev: $lev ".PHP_EOL;
+                */
+                //metaphone()
+                $meta1 = metaphone($input,5);
+                $meta2 = metaphone($buffer,5);
+                $sim_mate = similar_text($meta1,$meta2,$perc_meta);
+                $lev_meta = levenshtein($meta1,$meta2);
+
+                if($lev_meta <= 1 && $sim_mate >= 1 && $perc_meta > $margin){
+                    array_push($result_set, [
+                        "compare" => $input,
+                        "word" => $buffer,
+                        "sim" => $sim,
+                        "perc" => $perc,
+                        "meta" => $meta1,
+                        "lev" => $lev,
+                        "metaphone" =>[
+                            "meta"=> $meta2,
+                            "lev" => $lev_meta,
+                            "sim" => $sim_mate,
+                            "perc" => $perc_meta
+                        ]
+                    ]);
+                    $count++;   
+                }
+            }
+        }
+
+        foreach($result_set as $value){
+
+            printf(
+                "%s > similarity: %d (%d), string lev: %d, meta1: %s, meta2: %s".PHP_EOL,
+                $value["word"],
+                $value["sim"],
+                $value["perc"],
+                $value["lev"],
+                $value["meta"],
+                $value["metaphone"]["meta"]
+            );
+        }
+        printf("%d words found".PHP_EOL,$count);
+        
+        fclose($word_list);
+    }
 }
