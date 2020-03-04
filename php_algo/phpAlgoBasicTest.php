@@ -119,7 +119,7 @@ class phpAlgoBasicTest extends TestCase
         $expected = $actual;
         //print_r($actual);
 
-        $actual = $phpalgo->mergeSort($actual, 0, count($actual));
+        $phpalgo->mergeSort($actual, 0, count($actual));
         sort($expected);
 
         $this->assertEquals(json_encode($actual),json_encode($expected));

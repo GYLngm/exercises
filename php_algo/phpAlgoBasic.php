@@ -165,9 +165,26 @@ class phpAlgoBasic
         }
     }
 
-    public function mergeSort(array $input, int $p=0, int $r=0) : array
+    /**
+     * 
+     * @param array &$input #array to sort
+     * @param int $p #start
+     * @param int $r #end
+     */
+    public function mergeSort(array &$input, int $p, int $r)
     {
-        
+
+        if($p < $r){
+            $q = ($p + $r)/2;
+            //Left
+            $this->mergeSort($input, $p, $q);
+            //Right
+            $this->mergeSort($input, $q+1, $r);
+
+            $this->merge($input,$p,$q,$r);
+        }
+
+        /*
         if($r == $p) return $input;
 
         $r = ($r < 1)?count($input):$r;
@@ -205,9 +222,27 @@ class phpAlgoBasic
                     $j++;
                 } 
             }
+        }*/
+    }
+
+    public function merge(array &$input, int $p, int $q, int $r){
+        echo PHP_EOL;
+        printf('first: %s, mid: %s, end: %s',$p,$q,$r);
+        //Slice array
+        $left = array_slice($input, $p, $r - $q);
+        $right = array_slice($input, $q + 1, $r);
+
+        for($i = 0, $j = 0, $k = $p; $k < $r; $k++){
+            if(!isset($right[$j]) || !isset($left[$i])){
+                continue;
+            } 
+            if($left[$i] <= $right[$j]){
+                $input[$k] = $left[$i++];
+            } else {
+                $input[$k] = $right[$j++];
+            } 
         }
 
-        return $sorted_arr;
     }
 
 }
