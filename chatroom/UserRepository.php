@@ -22,18 +22,24 @@ class UserRepository extends dbConnections
         ]);
     }
 
-    public function findUsers(string $username = null) : array
+    public function findUsers(string $username = null, $fetchAll = false) : mixed
     {
-        if($username != null){
-            $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE username=? LIMIT 1');
-            $stm->execute([$username]);
-            return $stm->fetch();
+        if($fetchAll) {
+            return $this->getInstance()->query('
+                SELECT * 
+                FROM users
+            ')->fetchAll(PDO::FETCH_CLASS,"User");
+        } else {
+            if($username != null){
+                $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE username=? LIMIT 1');
+                $stm->execute([$username]);
+                return $stm->fetch(PDO::FETCH_CLASS,"User");
+            } 
+
+            return false;
         }
 
-        return $this->getInstance()->query('
-            SELECT * 
-            FROM users
-        ')->fetchAll();
+
     }
 
     public function findOnlineUsers() : array
@@ -48,6 +54,15 @@ class UserRepository extends dbConnections
     {
         $stm = $this->getInstance()->prepare('UPDATE users SET online=!online Where uid=?');
         return $stm->execute([$user->getUid()]);
+    }
+
+    public function loadUser(array $rowData) : User
+    {
+        $user = new User();
+        foreach($rowData as $key=>$value)
+        {
+            
+        }
     }
 
 }
