@@ -27,7 +27,8 @@ class MessageController
         echo json_encode($res);
     }
 }
-
+/*
 $msgC = new MessageController();
 $msgC->sendText();
 $msgC->ajaxUpdate();
+*/

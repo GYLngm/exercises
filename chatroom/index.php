@@ -1,7 +1,7 @@
 <?php
     require_once("UserRepository.php");
-
-
+    require_once("LoginController.php");
+    require_once("MessageController.php");
 
 ?>
 <!DOCTYPE html>
@@ -19,6 +19,16 @@
 </head>
 <body>
 <?php
+
+    $login_handler = new LoginController();
+    if(isset($_POST['username']))
+    {
+        if(!$login_handler->login($_POST['username'],$_POST['password']))
+        {
+          die('login error');
+        }
+    } 
+
     if(isset($_GET['actionType']) && $_GET['actionType'] == 'dashbord')
         include("main.php");
     else
