@@ -5,6 +5,9 @@ require_once("User.php");
 
 class UserRepository extends dbConnections
 {
+    
+    const BY_USERNAME = 1;
+    const BY_UID = 2;
 
     public function addUser(User $user) : bool
     {
@@ -22,24 +25,55 @@ class UserRepository extends dbConnections
         ]);
     }
 
-    public function findUsers(string $username = null, $fetchAll = false) : mixed
+    public function findUsers(string $username = null, $fetchAll = false)
     {
         if($fetchAll) {
             return $this->getInstance()->query('
                 SELECT * 
                 FROM users
-            ')->fetchAll(PDO::FETCH_CLASS,"User");
+            ')->fetchAll(PDO::FETCH_CLASS);
         } else {
             if($username != null){
                 $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE username=? LIMIT 1');
                 $stm->execute([$username]);
-                return $stm->fetch(PDO::FETCH_CLASS,"User");
+                return $stm->fetchObject("User");
             } 
 
             return false;
         }
+    }
 
+    public function load_by_username($username)
+    {
+        $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE username=? LIMIT 1');
+        //$stm->setFetchMode(PDO::FETCH_CLASS, 'User');
+        $stm->execute([$username]);
+        return $stm->fetchObject('User');
+    }
 
+    public function load_by_uid($uid)
+    {
+        $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE uid=? LIMIT 1');
+        $stm->execute([$uid]);
+        return $stm->fetchObject('User');
+    }
+
+    public function load_user($var, $trigger = 1)
+    {
+        switch($trigger){
+            case 1:
+                if(!is_string($var))
+                    return false;
+
+                return $this->load_by_username($var);
+                break;
+            case 2:
+                if(!is_int($var))
+                    return false;
+                
+                return $this->load_by_uid($uid);
+                break;
+        }
     }
 
     public function findOnlineUsers() : array
@@ -47,22 +81,13 @@ class UserRepository extends dbConnections
         $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE online = ?');
         $stm->execute([true]);
 
-        return $stm->fetchAll();
+        return $stm->fetchAll(PDO::FETCH_CLASS);
     }
 
     public function loginUser(User $user)
     {
         $stm = $this->getInstance()->prepare('UPDATE users SET online=!online Where uid=?');
         return $stm->execute([$user->getUid()]);
-    }
-
-    public function loadUser(array $rowData) : User
-    {
-        $user = new User();
-        foreach($rowData as $key=>$value)
-        {
-            
-        }
     }
 
 }

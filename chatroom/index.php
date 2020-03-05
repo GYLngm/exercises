@@ -29,7 +29,7 @@
         }
     } 
 
-    if(isset($_GET['actionType']) && $_GET['actionType'] == 'dashbord')
+    if(isset($_POST['actionType']) && $_POST['actionType'] == 'dashbord')
         include("main.php");
     else
         include("login.php");

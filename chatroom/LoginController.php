@@ -15,9 +15,31 @@ class LoginController
 
     public function login(string $username, string $password)
     {
-        $user = $this->findUsers($username);
-        var_dump($user);
-        session_start();
+        //$user = $this->repo->findUsers($username);
+        $user = $this->repo->load_user($username, UserRepository::BY_USERNAME);
+        //session_start();
+        if(empty($user))
+        {
+            echo 'no such user'.PHP_EOL;
+            return false;
+        }
+
+        if($user->getPassword() != $password)
+        {
+            echo 'password incorrect'.PHP_EOL;
+            return false;
+        }
+
+        $_SESSION['user'] = $user;
+
+        return true;
+    }
+
+    public function register(string $username, string $password, $request = null)
+    {
+        $user  = new User(true,$username,$password);
+        $this->repo->addUser($user);
+        $_SESSION['user'] = $user;
     }
 
 }
