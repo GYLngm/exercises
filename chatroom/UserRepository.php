@@ -28,10 +28,10 @@ class UserRepository extends dbConnections
     public function findUsers(string $username = null, $fetchAll = false)
     {
         if($fetchAll) {
-            return $this->getInstance()->query('
-                SELECT * 
-                FROM users
-            ')->fetchAll(PDO::FETCH_CLASS);
+            $stm = $this->getInstance()->prepare('SELECT * FROM users');
+            $stm->setFetchMode(PDO::FETCH_CLASS,'User');
+            $stm->execute();
+            return $stm->fetchAll();
         } else {
             if($username != null){
                 $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE username=? LIMIT 1');
