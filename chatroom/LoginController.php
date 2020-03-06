@@ -5,19 +5,25 @@ require_once("User.php");
 
 class LoginController
 {
-    private $repo;
     private $is_login = false;
 
     public function __construct()
     {
-        $this->repo = new UserRepository();
+
     }
 
     public function login(string $username, string $password)
     {
-        $user = $this->findUsers($username);
-        var_dump($user);
-        session_start();
+        $repo = new UserRepository();
+        $user = $repo->findUsers($username);
+        
+        if($user == null || empty($user)) 
+            return false;
+
+        //session_start();
+        $_SESSION['user'] = $user;
+
+        return $user;
     }
 
 }

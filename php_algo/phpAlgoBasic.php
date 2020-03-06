@@ -94,23 +94,12 @@ class phpAlgoBasic
     }
 
     /**
-<<<<<<< HEAD
      * 
      * @param array &$input #array to sort
      * @param int $p #start
      * @param int $r #end
      */
-    public function mergeSort(array &$input, int $p, int $r)
-=======
-     * Merge sorting
-     * Time complicity: O()
-     * @param array &$input
-     * @param int $p
-     * @param int $r
-     */
-    public function mergeSort(array $input, int $p=0, int $r=0) : array
->>>>>>> bd10d0dc8264607612462a4b5dcba9bef36c51d6
-    {
+    public function mergeSort(array &$input, int $p, int
 
         if($p < $r){
             $q = ($p + $r)/2;

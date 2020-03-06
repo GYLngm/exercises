@@ -22,24 +22,23 @@ class UserRepository extends dbConnections
         ]);
     }
 
-    public function findUsers(string $username = null, $fetchAll = false) : mixed
+    public function findUsers(string $username = null, $fetchAll = false)
     {
         if($fetchAll) {
             return $this->getInstance()->query('
                 SELECT * 
                 FROM users
-            ')->fetchAll(PDO::FETCH_CLASS,"User");
+            ')->fetchAll(PDO::FETCH_CLASS);
         } else {
-            if($username != null){
+            if(!empty($username) || $username != null){
                 $stm = $this->getInstance()->prepare('SELECT * FROM users WHERE username=? LIMIT 1');
+                $stm->setFetchMode(PDO::FETCH_CLASS, "User");
                 $stm->execute([$username]);
-                return $stm->fetch(PDO::FETCH_CLASS,"User");
+                return $stm->fetch();
             } 
-
-            return false;
         }
 
-
+        return NULL;
     }
 
     public function findOnlineUsers() : array
