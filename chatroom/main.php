@@ -20,7 +20,19 @@
             <div class="row">
                 <div class="col-4">
                     <ul class="friends">
-
+                    <?php
+                        require_once("UserRepository.php");
+                        require_once("User.php");
+                        $repo = new UserRepository();
+                        $users = $repo->findUsers('', true);
+                        foreach($users as $user){
+                            $username = $user->getUsername();
+                            if($user->getOnline() == false)
+                                echo htmlentities('<li style="color=grey;">$username</li>');
+                            else
+                                echo htmlentities('<li style="color=black;">$username</li>');
+                        }
+                    ?>
                     </ul>
                 </div>
                 <div class="col-8">

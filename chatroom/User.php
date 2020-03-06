@@ -9,10 +9,20 @@ class User
     private $create_datetime;
     private $online;
 
-    public function __construct(){
-        $this->online = false;
-        $this->create_datetime = date('Y-m-d H:i:s', time());
+    public function __construct($newObj = false, $username = null, $password = null){
+        if($username != null){
+            $this->setUsername($username);
+            $this->setPassword($password);
+        }
+        if($newObj)
+        {
+            $this->online = false;
+            $this->create_datetime = date('Y-m-d H:i:s', time());
+            $this->setIpAddress(null);
+        }
     }
+
+    public function __set($name, $value) {}
 
     /**
      * @return int
