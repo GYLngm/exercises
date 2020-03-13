@@ -17,7 +17,7 @@
         </nav>
 
         <div class="container mt-4">
-            <div style="display:inline-block;">
+            <div class="block-1 left">
                 <ul class="friends">
                     <?php
                         require_once("UserRepository.php");
@@ -27,36 +27,31 @@
                         //var_dump($users);
                         foreach($users as $user){
                             $username = $user->getUsername();
+                            $uid = $user->getUid();
                             if($user->getOnline() == 0)
-                                echo sprintf('<li style="color:grey;">%s</li>', $username);
+                                echo sprintf('<li style="color:grey;"><a href="#" id="u_%d">%s</a></li>', $uid, $username);
                             else
-                                echo sprintf('<li style="color:black;">%s</li>', $username);
+                                echo sprintf('<li style="color:black;"><a href="#" id="u_%d">%s</a></li>', $uid, $username);
                         }
                     ?>
                 </ul>
             </div>
-            <div style="display:inline-block;">
+            <div class="block-1 right">
                 <ul class="message-box" id="message_box">
 
                 </ul>
-                <div class="input-boc">
+                <div class="input-bloc">
                     <input type="hidden" name="actionType" value="sendText"/>
-                    <textarea class="form-control" name="package" style="display:inline;"></textarea>
-                    <button class="btn btn-primary" style="display:inline;float:right;" id="send">Send</button>
+                    <div>
+                        <textarea class="" name="package" style="
+                        width: 64.9em;
+                        height: 7em;
+                        display: block;
+                        float: left;
+                        resize:none;
+                        margin: 0 0;"></textarea>
+                        <a href="#" class="send-btn" id="send">Send</a>
+                    </div>
                 </div>
             </div>
-
-
-            <div class="row">
-                <div class="col-8">
- 
-                </div>
-                <div class="col-8">
-
-                </div>
-            </div>
-
-        </div>
-        <div class="container mt-4">
-                
         </div>

@@ -29,11 +29,12 @@
         }
     } 
 
-    if(isset($_POST['actionType']) && $_POST['actionType'] == 'dashbord')
-        include("main.php");
-    else
-        include("login.php");
 
+    if(isset($_POST['actionType']) && $_POST['actionType'] == 'dashbord'){
+        include("main.php");
+    } else {
+        include("login.php");
+    }
 ?>
     <script type="text/javascript" src="public/js/main.js"></script>
 </body>

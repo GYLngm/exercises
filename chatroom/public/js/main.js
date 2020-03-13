@@ -10,11 +10,10 @@ $(document).ready(function(){
         sendTime: "2020-02-02 15:17:35",
         content: "Hello",
     };
-    /*
     var userObj = {
         name: "Jiayu"
     };
-
+    /*
     var userListController = {
         appendUser : function(user){
             $("<li>").append($("<a>").attr("href","#").text(user.name)).appendTo("ul.friends");
