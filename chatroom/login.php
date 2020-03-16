@@ -3,7 +3,7 @@
 
 ?>
 
-<div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center" ng-controller="authController">
         <form action="index.php" method="POST">
             <div class="login-box">
                 <label for="username">Username</label>
