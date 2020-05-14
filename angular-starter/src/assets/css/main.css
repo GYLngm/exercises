@@ -1,0 +1,82 @@
+.block-1 {
+    display: inline-block;
+    position: absolute;
+    height: 85%;
+    /* bottom: 5%; */
+    /* top: 5%; */
+    margin-bottom: 0;
+}
+.block-1.left {
+    left: 5%;
+    min-width: 10%;
+}
+
+.block-1.right {
+    right: 5%;
+    min-width: 80%;
+}
+
+ul.friends {
+    position: relative;
+    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.16);
+    list-style: none;
+    min-height: 51em;
+    overflow: auto;
+    margin: 0 0;
+    padding: 0 0;
+}
+ul.friends li {
+    padding: 0.5rem 1em;
+}
+
+ul.message-box {
+    list-style: none;
+    min-height: 44em;
+    overflow: auto;
+    margin: 0 0;
+    padding: 0 0;
+    border: 1px solid darkcyan;
+}
+
+ul.message-box li {
+    background-color: beige;
+    padding: 0.5rem 1em;
+}
+
+.input-bloc {
+    max-height: auto;
+}
+
+.login-box {
+    background-color: whitesmoke;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.31);
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    padding: 1rem;
+}
+
+.register-box {
+    background-color: whitesmoke;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.31);
+    position: absolute;
+    left: 45%;
+    top: 15%;
+    padding: 1rem;
+}
+
+a.send-btn {
+    text-decoration: none;
+    background-color: #343a40!important;
+    color: white;
+    height: 7em;
+    width: 6em;
+    /* display: block; */
+    float: right;
+    text-align: center;
+    padding: 2.5em 0em;
+
+}
+a.send-btn:hover {
+    background-color: #474f57;
+}
