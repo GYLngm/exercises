@@ -13,15 +13,15 @@ $(document).ready(function(){
     var userObj = {
         name: "Jiayu"
     };
-
+    /*
     var userListController = {
         appendUser : function(user){
-            
             $("<li>").append($("<a>").attr("href","#").text(user.name)).appendTo("ul.friends");
         }
     };
     userListController.appendUser(userObj);
-
+    */
+   
     var messageBoxController = {
         appendMessage: function(msg){
             $("ul.message-box").append(

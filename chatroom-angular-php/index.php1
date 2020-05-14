@@ -1,0 +1,60 @@
+<?php
+    require_once("web/repository/UserRepository.php");
+    require_once("web/controllers/LoginController.php");
+    require_once("web/controllers/MessageController.php");
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat room</title>
+
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/main.css">
+    <script src="public/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="public/js/bootstrap.min.js"></script>
+    <script src="public/js/angular-1.7.9/angular.min.js"></script>
+    <script type="text/javascript" src="public/js/main.js"></script>
+</head>
+<body ng-app="myapp">
+
+<?php
+    header("Location:");
+    $getIp='192.168.1.5';
+    echo 'IP:',$getIp;
+    echo '<br/>';
+    $content = file_get_contents("http://api.map.baidu.com/location/ip?ak=7IZ6fgGEGohCrRKUE9Rj4TSQ&ip={$getIp}&coor=bd09ll");
+    $json = json_decode($content);
+
+    echo 'log:',$json->{'content'}->{'point'}->{'x'};//按层级关系提取经度数据
+    echo '<br/>';
+    echo 'lat:',$json->{'content'}->{'point'}->{'y'};//按层级关系提取纬度数据
+    echo '<br/>';
+    print $json->{'content'}->{'address'};//按层级关系提取address数据
+/*
+
+    $login_handler = new LoginController();
+    if(empty($_SESSION['user']) && isset($_POST['username']))
+    {
+        if(!$login_handler->login($_POST['username'],$_POST['password']))
+        {
+          die('login error');
+        }
+    } 
+
+    if(isset($_POST['actionType']) && $_POST['actionType'] == 'dashbord'){
+        include("main.php");
+    } else {
+        include("login.php");
+    }
+*/
+?>
+</body>
+</html>
+
+<?php
+    
+?>

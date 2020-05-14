@@ -1,0 +1,14 @@
+<h6>
+  <a
+    *ngIf="friend.online==1; else loggedOut"
+    [title]="friend.username"
+    [routerLink]="['/friends', userId]"
+  >
+    {{ friend.username }}
+  </a>
+
+  <ng-template #loggedOut>
+    {{ friend.username }}
+  </ng-template>
+
+</h6>

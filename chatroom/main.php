@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-controller="navController">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,23 +16,42 @@
         </div>
         </nav>
 
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-4">
-                    <ul class="friends">
+        <div class="container mt-4" ng-controller="mainController">
+            <div class="block-1 left">
+                <ul class="friends">
+                    <?php
+                        require_once("UserRepository.php");
+                        require_once("User.php");
+                        $repo = new UserRepository();
+                        $users = $repo->findUsers('', true);
+                        //var_dump($users);
+                        foreach($users as $user){
+                            $username = $user->getUsername();
+                            $uid = $user->getUid();
+                            if($user->getOnline() == 0)
+                                echo sprintf('<li style="color:grey;"><a href="#" id="u_%d">%s</a></li>', $uid, $username);
+                            else
+                                echo sprintf('<li style="color:black;"><a href="#" id="u_%d">%s</a></li>', $uid, $username);
+                        }
+                    ?>
+                </ul>
+            </div>
+            <div class="block-1 right">
+                <ul class="message-box" id="message_box" ng-controller="messageController">
 
-                    </ul>
-                </div>
-                <div class="col-8">
-                    <ul class="message-box" id="message_box">
-
-                    </ul>
+                </ul>
+                <div class="input-bloc">
+                    <input type="hidden" name="actionType" value="sendText"/>
+                    <div>
+                        <textarea class="" name="package" style="
+                        width: 64.9em;
+                        height: 7em;
+                        display: block;
+                        float: left;
+                        resize:none;
+                        margin: 0 0;"></textarea>
+                        <a href="#" class="send-btn" id="send">Send</a>
+                    </div>
                 </div>
             </div>
-
-        </div>
-        <div class="container mt-4">
-                <input type="hidden" name="actionType" value="sendText"/>
-                <textarea class="form-control" name="package" style="display:inline;"></textarea>
-                <button class="btn btn-primary" style="display:inline;float:right;" id="send">Send</button>
         </div>
