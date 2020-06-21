@@ -9,7 +9,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ChatBarComponent } from './chat-bar/chat-bar.component';
 import { FriendListComponent } from './friend-list/friend-list.component';
-import { FriendDetialComponent } from './friend-detial/friend-detial.component';
+import { FriendDetailComponent } from './friend-detail/friend-detail.component';
 import { LoginComponent } from './login/login.component';
 import { BackendService } from './backend.service'
 
@@ -20,7 +20,7 @@ import { BackendService } from './backend.service'
     TopBarComponent,
     ChatBarComponent,
     FriendListComponent,
-    FriendDetialComponent,
+    FriendDetailComponent,
     LoginComponent
   ],
   imports: [

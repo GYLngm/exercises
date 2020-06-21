@@ -6,11 +6,11 @@ import { friends } from '../friends';
 //import { friends } from '../friends/friends.component';
 
 @Component({
-  selector: 'app-friend-detial',
-  templateUrl: './friend-detial.component.html',
-  styleUrls: ['./friend-detial.component.css']
+  selector: 'app-friend-detail',
+  templateUrl: './friend-detail.component.html',
+  styleUrls: ['./friend-detail.component.css']
 })
-export class FriendDetialComponent implements OnInit {
+export class FriendDetailComponent implements OnInit {
   friend;
 
   constructor(

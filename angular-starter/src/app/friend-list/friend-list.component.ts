@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { friends } from '../friends';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-friend-list',
@@ -8,12 +9,15 @@ import { friends } from '../friends';
   styleUrls: ['./friend-list.component.css']
 })
 export class FriendListComponent implements OnInit {
-  friends = friends;
+  friends;
 
-  constructor() { }
+  constructor(
+    private service: BackendService
+  ) { }
 
   ngOnInit() {
-
+    this.friends = this.service.getFriends();
+    console.log(this.friends)
   }
 
 }

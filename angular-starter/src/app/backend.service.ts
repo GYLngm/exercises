@@ -12,6 +12,6 @@ export class BackendService {
   ) { }
 
   getFriends(){
-    return this.http.get('/web/');
+    return this.http.get('http://localhost:8015/web/index.php?getfriends=1');
   }
 }

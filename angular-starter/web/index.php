@@ -8,7 +8,7 @@
       'friends' => [],
     ];
 
-    if(isset($_GET['friends'])){
+    if(isset($_GET['getfriends'])){
       $users = $UserRepo->findUsers('', true);
       foreach($users as $key => $user){
         $response['friends'][$user['uid']] = $user;

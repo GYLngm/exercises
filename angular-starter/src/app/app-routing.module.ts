@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FriendDetialComponent } from './friend-detial/friend-detial.component';
+import { FriendDetailComponent } from './friend-detail/friend-detail.component';
 
 const routes: Routes = [
-  { path : 'friends/:userId', component: FriendDetialComponent }
+  { path : 'friends/:userId', component: FriendDetailComponent }
 ];
 
 @NgModule({

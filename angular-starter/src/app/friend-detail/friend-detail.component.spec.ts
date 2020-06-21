@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FriendDetialComponent } from './friend-detial.component';
+import { FriendDetailComponent } from './friend-detail.component';
 
-describe('FriendDetialComponent', () => {
-  let component: FriendDetialComponent;
-  let fixture: ComponentFixture<FriendDetialComponent>;
+describe('FriendDetailComponent', () => {
+  let component: FriendDetailComponent;
+  let fixture: ComponentFixture<FriendDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FriendDetialComponent ]
+      declarations: [ FriendDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FriendDetialComponent);
+    fixture = TestBed.createComponent(FriendDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
