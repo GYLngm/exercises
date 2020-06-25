@@ -99,8 +99,8 @@ class phpAlgoBasic
      * @param int $p #start
      * @param int $r #end
      */
-    public function mergeSort(array &$input, int $p, int
-
+    public function mergeSort(array &$input, int $p, int $r){
+        
         if($p < $r){
             $q = ($p + $r)/2;
             //Left

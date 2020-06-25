@@ -1,0 +1,6 @@
+
+
+
+var isValideSudoku = function(board) {
+
+}
